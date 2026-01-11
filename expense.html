@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="background">
+  <div class="container">
+    <h1><i class="fas fa-wallet"></i> Expense Tracker</h1>
+
+    <!-- Income + Budget Section -->
+    <div class="income-section" style="margin-bottom:20px;">
+      <input type="number" id="income-input" placeholder="Enter Monthly Income">
+      <input type="number" id="budget-input" placeholder="Set Budget Limit">
+      <button id="set-income-btn">Set</button>
+    </div>
+    <div class="summary">
+      <p><strong>Total Income:</strong> ₹<span id="total-income">0</span></p>
+      <p><strong>Total Expenses:</strong> ₹<span id="total-expense">0</span></p>
+      <p><strong>Savings:</strong> ₹<span id="savings">0</span></p>
+      <p id="budget-warning" style="color:red; font-weight:bold; display:none;">⚠ Budget Limit Exceeded!</p>
+    </div>
+
+    <!-- Expense Form -->
+    <form id="expense-form" class="form-section">
+      <input type="text" id="expense-name" placeholder="Expense Name" required />
+      <input type="number" id="expense-amount" placeholder="Amount" required />
+      <select id="expense-category" required>
+        <option value="" disabled selected>Select Category</option>
+        <option value="Food">🍔 Food</option>
+        <option value="Transport">🚌 Transport</option>
+        <option value="Entertainment">🎮 Entertainment</option>
+        <option value="shopping">🛒 Shopping</option>
+        <option value="Other">🛠 Other</option>
+      </select>
+      <input type="date" id="expense-date" required />
+      <button type="submit"><i class="fas fa-plus-circle"></i> Add</button>
+    </form>
+
+    <!-- Filters -->
+    <div class="filter">
+      <label for="filter-category">Filter by Category:</label>
+      <select id="filter-category">
+        <option value="All">All</option>
+        <option value="Food">Food</option>
+        <option value="Transport">Transport</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Shopping">🛒Shopping</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="filter-period">View:</label>
+      <select id="filter-period">
+        <option value="All">All Time</option>
+        <option value="Monthly">This Month</option>
+        <option value="Weekly">This Week</option>
+      </select>
+    </div>
+
+    <!-- Expense Table -->
+    <div class="expense-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Expense Name</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="expense-list"></tbody>
+      </table>
+      <div class="total-amount">
+        <strong>Total:</strong> ₹<span id="total-amount">0</span>
+      </div>
+    </div>
+
+    <!-- Chart -->
+    <div class="chart-container" style="width:400px; margin:auto;">
+      <canvas id="expenseChart"></canvas>
+    </div>
+  </div>
+</div>
+<script src="expense.js"></script>
+</body>
+</html>

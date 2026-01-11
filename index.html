@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="auth-style.css">
+</head>
+<body>
+  <div class="form-container">
+    <h2>Sign Up</h2>
+    <form id="signupForm">
+      <input type="text" id="signupUsername" placeholder="Username" required>
+      <input type="password" id="signupPassword" placeholder="Password" required>
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="login.html">Login</a></p>
+  </div>
+
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById("signupUsername").value.trim();
+      const password = document.getElementById("signupPassword").value;
+
+      if (!username || !password) return;
+
+      // Check if user already exists
+      if (localStorage.getItem(username)) {
+        alert("Username already exists. Please choose another.");
+        return;
+      }
+
+      // Store user in localStorage
+      const userData = { username, password, expenses: [] };
+      localStorage.setItem(username, JSON.stringify(userData));
+
+      
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>
